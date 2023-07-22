@@ -1,4 +1,6 @@
-const prompt = require('prompt-sync')();
+const prompt = require('prompt-sync')({
+    history: require('prompt-sync-history')()
+  });
 const colours = require('ansi-colors');
 const rps = () => {
     switch(Math.floor(Math.random()*3)){
@@ -22,7 +24,8 @@ const userRps = (userInput) => {
   }
 
 while (userRps) {
-    const userInput = prompt('rock, paper, scissors: ');  
+    const userInput = prompt('rock, paper, scissors: ')
+    prompt.history.save();  
     if (userRps(userInput) === rps()) {
         console.log(colours.yellow('Draw')) ;
     } else if (userRps(userInput) === 'rock') {
